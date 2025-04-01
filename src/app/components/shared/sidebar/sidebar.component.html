@@ -1,0 +1,43 @@
+<div
+  class="sidenav"
+  [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''"
+>
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+    </button>
+   
+  </div>
+  <div class="sidenav-nav">
+    @for (item of items; track $index) {
+      <li class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <img class="sidenav-link-icon" [src]="item.icon" alt="{{ item.label }}">
+          @if (!isLeftSidebarCollapsed()) {
+            <span class="sidenav-link-text">{{ item.label }}</span>
+          }
+        </a>
+      </li>
+    }
+  </div>
+  <div class="sidenav-profile">
+    <!-- TODO::Define the route for user configuration -->
+    <a [routerLink]="['home']">
+      @if(user.imgUrl) {
+        <img class="profile-img" src="images/no_image_pic.png" alt="Foto de {{ user.name }}" />
+      } @else {
+        <img class="profile-img" [src]="user.imgUrl" alt="Foto de {{ user.name }}" />
+      }
+    </a>
+    @if (!isLeftSidebarCollapsed()) {
+      <div class="profile-info">
+        <p class="profile-name">{{ user.name }} {{ user.lastNamme }}</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.login-form {
+    max-width: 400px;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    h2 span {
+      color: var(--primary-color);
+    }
+  }
+  
+  body {
+    background-color: var(--bg-light);
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    &:hover {
+      background-color: var(--primary-color-dark);
+    }
+  
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .form-control.is-invalid {
+      border-color: var(--error-color);
+    }
+  }
