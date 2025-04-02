@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,6 +18,11 @@ export class SidebarComponent {
   isLeftSidebarCollapsed = input.required<boolean>();
   changeIsLeftSidebarCollapsed = output<boolean>();
   items = [
+    {
+      routerLink: 'home',
+      icon: 'icons/icon-home.png',
+      label: 'Home'
+    },
     {
       routeLink: 'projects',
       icon: 'icons/icon-calender.png',

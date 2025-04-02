@@ -23,6 +23,7 @@ export class AuthService {
 
     return this.http.post(`${environment.apiUrl}/login`, authData, { observe: 'response' }).pipe(
       map(resp => {
+        console.log(resp);
         const token = resp.headers.get('Authorization');
         if (token) {
           this.saveToken(token);
