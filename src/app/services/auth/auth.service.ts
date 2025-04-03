@@ -23,7 +23,6 @@ export class AuthService {
 
     return this.http.post(`${environment.apiUrl}/login`, authData, { observe: 'response' }).pipe(
       map(resp => {
-        console.log(resp);
         const token = resp.headers.get('Authorization');
         if (token) {
           this.saveToken(token);
@@ -39,7 +38,8 @@ export class AuthService {
   }
 
   private saveToken( token: string ) {
-    localStorage.setItem('token', token);
+    const cleanToken = token.replace(/^Bearer\s*/, ''); 
+    localStorage.setItem('token', cleanToken);
   }
 
   private saveUser( user: User ) {

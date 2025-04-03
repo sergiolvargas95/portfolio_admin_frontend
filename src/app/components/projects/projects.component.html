@@ -1,0 +1,6 @@
+<app-list-view 
+  title="Projects List" 
+  [elements]="projects" 
+  [displayFields]="['title', 'Description', 'status']" 
+  (deleteElement)="deleteProject($event)">
+</app-list-view>

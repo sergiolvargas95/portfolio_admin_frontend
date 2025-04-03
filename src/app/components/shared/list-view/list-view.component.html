@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>{{ title }}</h2>
+  
+    <table>
+      <thead>
+        <tr>
+        @for(field of displayFields; track $index) {
+            <th>{{ field  }}</th>
+          }
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (element of elements; track $index) {
+        <tr>
+          <td> {{ element.title }} </td>
+          <td> {{ element.description }} </td>
+          <td> {{ element.repository_url }} </td>
+          <td>
+            <div class="dropdown" [class.open]="openDropdown() === $index">
+              <button (click)="toggleDropdown($index)">Actions</button>
+          
+              @if(openDropdown() === $index) { 
+                <ul class="dropdown-menu">
+                  <li><button (click)="viewDetails(element)">View Details</button></li>
+                  <li><button (click)="editElement(element)">Edit</button></li>
+                </ul>
+              }
+            </div>
+          </td>
+        </tr>
+          }
+      </tbody>
+    </table>
+  </div>
+  
