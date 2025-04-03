@@ -1,7 +1,7 @@
 <div class="container">
     <h2>{{ title }}</h2>
   
-    <table>
+    <table class="table table-striped-columns">
       <thead>
         <tr>
         @for(field of displayFields; track $index) {
@@ -17,16 +17,28 @@
           <td> {{ element.description }} </td>
           <td> {{ element.repository_url }} </td>
           <td>
-            <div class="dropdown" [class.open]="openDropdown() === $index">
-              <button (click)="toggleDropdown($index)">Actions</button>
-          
-              @if(openDropdown() === $index) { 
-                <ul class="dropdown-menu">
-                  <li><button (click)="viewDetails(element)">View Details</button></li>
-                  <li><button (click)="editElement(element)">Edit</button></li>
-                </ul>
-              }
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="viewDetails(element)">View</a></li>
+                <li><a class="dropdown-item" (click)="editElement(element)">Edit</a></li>
+              </ul>
             </div>
+            <!-- <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" 
+                      type="button" 
+                      data-bs-toggle="dropdown" 
+                      data-bs-display="static">
+                Actions
+              </button>
+            
+              <ul class="dropdown-menu">
+                <li><button class="dropdown-item" ">View Details</button></li>
+                <li><button class="dropdown-item" >Edit</button></li>
+              </ul>
+            </div> -->
           </td>
         </tr>
           }

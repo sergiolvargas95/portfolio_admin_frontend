@@ -20,12 +20,10 @@ export class ListViewComponent {
   }
 
   viewDetails(element: any) {
-    console.log("View Details:", element);
     // Implementar lógica para ver detalles (modal, navegación, etc.)
   }
 
   editElement(element: any) {
-    console.log("Edit Element:", element);
     // Implementar lógica para editar el elemento
   }
 }

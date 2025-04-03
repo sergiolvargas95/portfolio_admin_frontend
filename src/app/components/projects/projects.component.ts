@@ -20,7 +20,6 @@ export class ProjectsComponent implements OnInit {
   loadProjects() {
     this.projectService.getAll().subscribe(resp => {
       this.projects = resp as any[];
-      console.log(this.projects);
     });
   }
 
