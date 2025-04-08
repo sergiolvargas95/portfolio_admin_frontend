@@ -5,13 +5,13 @@ import { environment } from '../../environments/environments';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class TechnologyService {
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http:HttpClient ) { }
 
   getAll() {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${environment.apiUrl}/v1/projects`, { headers });
+    return this.http.get(`${environment.apiUrl}/v1/technologies`, { headers });
   }
 
   private getAuthHeaders(): HttpHeaders {

@@ -103,9 +103,13 @@
   .active {
     background-color: #fff;
   }
-  .active .sidenav-link-icon,
+
   .active .sidenav-link-text {
     color: #000;
+  }
+
+  .sidenav-nav-link.active .sidenav-link-icon {
+    filter: brightness(0); /* Hace que el icono se ponga negro */
   }
 
   .sidenav-profile {

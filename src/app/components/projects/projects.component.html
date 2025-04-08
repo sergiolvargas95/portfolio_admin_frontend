@@ -1,6 +1,6 @@
 <app-list-view 
   title="Projects List" 
   [elements]="projects" 
-  [displayFields]="['title', 'Description', 'Repository']" 
-  (deleteElement)="deleteProject($event)">
+  [displayFields]="['title', 'description', 'repository_url']" 
+  (edit)="onEditProject($event)">
 </app-list-view>

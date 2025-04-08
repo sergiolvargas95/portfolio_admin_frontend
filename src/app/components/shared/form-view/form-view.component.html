@@ -1,1 +1,22 @@
-<p>form-view works!</p>
+<div class="container mt-4">
+  <h2>{{ formTitle }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #formRef="ngForm">
+    @for (field of fields; track $index) {
+      <div class="mb-3">
+        <label [for]="field" class="form-label">{{ field | titlecase }}</label>
+        <input
+          [(ngModel)]="element[field]"
+          [name]="field"
+          [id]="field"
+          class="form-control"
+          required
+        />
+      </div>
+    }
+
+    <button type="submit" class="btn btn-primary" [disabled]="formRef.invalid">
+      Guardar
+    </button>
+  </form>
+</div>

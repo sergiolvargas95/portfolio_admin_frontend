@@ -1,0 +1,11 @@
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    &:hover {
+      background-color: var(--primary-color-dark);
+    }
+  }
+
+.icon-plus-white {
+    width: 30px;
+}

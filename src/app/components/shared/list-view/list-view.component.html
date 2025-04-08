@@ -1,11 +1,15 @@
 <div class="container">
-    <h2>{{ title }}</h2>
-  
-    <table class="table table-striped-columns">
+    <h2 class="m-2">{{ title }}</h2>
+    <div class="w-100 p-2 d-flex flex-row-reverse">
+      <button class="btn btn-primary">
+        <img class="icon-plus-white" src="icons/icon-plus-white.png" alt="">
+      </button>
+    </div>
+    <table class="table table-striped table-bordered ">
       <thead>
         <tr>
         @for(field of displayFields; track $index) {
-            <th>{{ field  }}</th>
+            <th>{{ field  | titlecase }}</th>
           }
           <th>Acciones</th>
         </tr>
@@ -13,9 +17,9 @@
       <tbody>
         @for (element of elements; track $index) {
         <tr>
-          <td> {{ element.title }} </td>
-          <td> {{ element.description }} </td>
-          <td> {{ element.repository_url }} </td>
+          @for (field of displayFields; track $index) {
+            <td> {{ element[field] }} </td>
+          }
           <td>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,19 +30,6 @@
                 <li><a class="dropdown-item" (click)="editElement(element)">Edit</a></li>
               </ul>
             </div>
-            <!-- <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" 
-                      type="button" 
-                      data-bs-toggle="dropdown" 
-                      data-bs-display="static">
-                Actions
-              </button>
-            
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" ">View Details</button></li>
-                <li><button class="dropdown-item" >Edit</button></li>
-              </ul>
-            </div> -->
           </td>
         </tr>
           }
