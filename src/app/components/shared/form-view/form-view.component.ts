@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { entityConfig } from '../../../config/entity-config';
+import { FactoryService } from '../../../services/factory/factory.service';
 
 @Component({
   selector: 'app-form-view',
@@ -13,10 +14,13 @@ import { entityConfig } from '../../../config/entity-config';
 export class FormViewComponent {
   element: any = {};
   fields: string[] = [];
-  formTitle = 'Formulario';
+  formTitle = 'Form';
   entityName = '';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private factoryService: FactoryService
+  ) {}
 
   ngOnInit() {
     this.entityName = this.route.snapshot.paramMap.get('entity')!;
@@ -31,12 +35,14 @@ export class FormViewComponent {
 
     this.fields = config.fields;
     this.formTitle = id
-      ? `Editar ${config.title}`
-      : `Crear ${config.title}`;
+      ? `Edit ${config.title}`
+      : `Create ${config.title}`;
 
     if (id) {
-      // Simulación de fetch (ej: usar factoryService.getServiceFor(entity).getById(id))
-      console.log(`Cargar datos para ${this.entityName} con ID ${id}`);
+      const service = this.factoryService.getServiceFor(this.entityName);
+      service.getById(id).subscribe((resp:any) =>{
+        this.element = resp;
+      });
     }
   }
 

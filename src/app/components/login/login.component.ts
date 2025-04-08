@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   user: User;
   userToken?: string;
+  showPassword: boolean = false;
 
   constructor(
     private fb:FormBuilder,
@@ -37,8 +40,18 @@ export class LoginComponent {
     this.user.email = this.loginForm.get('email')?.value;
     this.user.password = this.loginForm.get('password')?.value;
 
-   this.auth.login(this.user).subscribe( resp => {
-     this.router.navigateByUrl('/home');
+    this.auth.login(this.user).subscribe({
+      next: (resp) => {
+        this.router.navigateByUrl('/home');
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login failed',
+          text: err.error?.message || 'Incorrect credentials or server error.',
+          confirmButtonText: 'Accept'
+        });
+      }
     });
   }
 
