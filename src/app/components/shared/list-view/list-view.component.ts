@@ -12,7 +12,14 @@ export class ListViewComponent {
   @Input() title: string = '';
   @Input() elements: any[] = [];
   @Input() displayFields: string[] = [];
+  @Input() currentPage: number = 0;
+  @Input() lastPage: number = 0;
+  @Input() totalElements: number = 0;
+  @Input() totalElementsPerPage: number = 0;
+  @Input() initialElementsPerPage: number = 0;
   @Output() deleteElement = new EventEmitter<number>();
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+
 
   openDropdown = signal<number | null>(null);
 
@@ -30,6 +37,11 @@ export class ListViewComponent {
 
   editElement(project: any) {
     this.router.navigate(['/form', 'projects', 'edit', project.id]);
+  }
 
+  changePage(page: number) {
+    if (page >= 1 && page <= this.lastPage) {
+      this.pageChange.emit(page);
+    }
   }
 }

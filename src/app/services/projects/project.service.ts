@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class ProjectService {
     });
   }
   
-  getAll() {
+  getAll(page: number = 1): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${environment.apiUrl}/v1/projects`, { headers });
+    return this.http.get(`${environment.apiUrl}/v1/projects?page=${page}`, { headers });
   }
 
   getById(id: string) {

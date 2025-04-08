@@ -2,5 +2,10 @@
   title="Projects List" 
   [elements]="projects" 
   [displayFields]="['title', 'description', 'repository_url']" 
+  [currentPage]="currentPage"
+  [lastPage]="lastPage"
+  [totalElements]="totalElements"
+  [totalElementsPerPage]="totalElementsPerPage"
+  [initialElementsPerPage]="initialElementsPerPage"
   (edit)="onEditProject($event)">
 </app-list-view>

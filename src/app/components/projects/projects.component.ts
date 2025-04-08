@@ -10,8 +10,12 @@ import { ProjectService } from '../../services/projects/project.service';
 })
 export class ProjectsComponent implements OnInit {
   projects: any[] = [];
+  currentPage: number = 1;
+  lastPage: number = 1;
   selectedProject: any = null;
-
+  totalElements: number = 0;
+  totalElementsPerPage: number = 0;
+  initialElementsPerPage: number = 0;
   constructor( private projectService: ProjectService ) {}
 
   ngOnInit() {
@@ -20,7 +24,12 @@ export class ProjectsComponent implements OnInit {
 
   loadProjects() {
     this.projectService.getAll().subscribe((resp:any) => {
-      this.projects = resp;
+      this.projects = resp.data;
+      this.currentPage = resp.current_page;
+      this.lastPage = resp.last_page;
+      this.totalElements = resp.total;
+      this.totalElementsPerPage = resp.to;
+      this.initialElementsPerPage = resp.from;
     });
   }
 

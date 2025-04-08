@@ -1,5 +1,8 @@
 <div class="container">
-    <h2 class="m-2">{{ title }}</h2>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="m-2">{{ title }}</h4>
+      </div>
     <div class="w-100 p-2 d-flex flex-row-reverse">
       <button class="btn btn-primary">
         <img class="icon-plus-white" src="icons/icon-plus-white.png" alt="">
@@ -35,5 +38,32 @@
           }
       </tbody>
     </table>
+    @if (lastPage > 0) {
+      <div class="ms-4 d-flex d-row justify-content-between">
+        <ul class="pagination justify-content-start">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+          </li>
+      
+          @for (page of [].constructor(lastPage); track $index) {
+            <li
+            class="page-item"
+            [class.active]="currentPage === $index + 1"
+          >
+            <button class="page-link" (click)="changePage($index + 1)">{{ $index + 1 }}</button>
+          </li>
+          }
+      
+          <li class="page-item" [class.disabled]="currentPage === lastPage">
+            <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+          </li>
+        </ul>
+        <div class="pe-4">
+          Showing records {{ initialElementsPerPage }} to {{ totalElementsPerPage }} of a total of {{ totalElements }} records
+        </div>
+      </div>
+    }
+    
+    </div>
   </div>
   
