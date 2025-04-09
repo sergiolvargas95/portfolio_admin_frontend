@@ -1,22 +1,57 @@
-<div class="container mt-4">
-  <h2>{{ formTitle }}</h2>
+<div class="container mt-5">
+  <div class="justify-content-center">
+      <div class="card shadow rounded-4">
+        <div class="card-header rounded-top-4">
+          <h3 class="mb-0">{{ formTitle }}</h3>
+        </div>
 
-  <form (ngSubmit)="onSubmit()" #formRef="ngForm">
-    @for (field of fields; track $index) {
-      <div class="mb-3">
-        <label [for]="field" class="form-label">{{ field | titlecase }}</label>
-        <input
-          [(ngModel)]="element[field]"
-          [name]="field"
-          [id]="field"
-          class="form-control"
-          required
-        />
+        <div class="card-body p-4">
+          <form (ngSubmit)="onSubmit()" #formRef="ngForm">
+            @for (field of fields; track $index) {
+              @if(field !== 'image') {
+                <div class="mb-3">
+                  <label [for]="field" class="form-label fw-semibold">{{ field | titlecase }}</label>
+                  <input
+                    [(ngModel)]="element[field]"
+                    [name]="field"
+                    [id]="field"
+                    class="form-control"
+                    placeholder="Enter {{ field | lowercase }}"
+                    required
+                  />
+                </div>
+              }
+             
+            }
+
+            <!-- Campo de imagen -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Imagen</label>
+            <input
+              type="file"
+              class="form-control"
+              (change)="onFileSelected($event)"
+              accept="image/*"
+            />
+          </div>
+
+          @if(existingImageUrl && !imagePreview) {
+            <div class="mb-3 text-center">
+              <img [src]="existingImageUrl" class="img-fluid rounded shadow-sm" alt="Imagen actual" style="max-height: 200px;">
+            </div>
+          }
+
+          @if(imagePreview) {
+            <div  class="mb-3 text-center">
+              <img [src]="imagePreview" class="img-fluid rounded shadow-sm" alt="Vista previa" style="max-height: 200px;">
+            </div>
+          }
+
+            <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="formRef.invalid">
+              <i class="bi bi-check-circle me-1"></i> Guardar
+            </button>
+          </form>
+        </div>
       </div>
-    }
-
-    <button type="submit" class="btn btn-primary" [disabled]="formRef.invalid">
-      Guardar
-    </button>
-  </form>
+    </div>
 </div>

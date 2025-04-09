@@ -5,11 +5,11 @@ interface EntityConfig {
 
 export const entityConfig: { [key: string]: EntityConfig } = {
   projects: {
-    fields: ['title', 'description', 'repository_url'],
-    title: 'Proyecto',
+    fields: ['image', 'title', 'description', 'repository_url', 'demo_url'],
+    title: 'Proyect',
   },
   technologies: {
     fields: ['name', 'level'],
-    title: 'Tecnología',
+    title: 'Technology',
   }
 };
