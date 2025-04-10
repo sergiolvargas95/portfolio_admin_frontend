@@ -7,6 +7,27 @@
 
         <div class="card-body p-4">
           <form (ngSubmit)="onSubmit()" #formRef="ngForm">
+            @if(existingImageUrl && !imagePreview) {
+              <div class="mb-3 text-center">
+                <img [src]="existingImageUrl" class="img-fluid rounded shadow-sm" alt="Imagen actual" style="max-height: 200px;">
+              </div>
+            }
+  
+            @if(imagePreview) {
+              <div  class="mb-3 text-center">
+                <img [src]="imagePreview" class="img-fluid rounded shadow-sm" alt="Vista previa" style="max-height: 200px;">
+              </div>
+            }
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Imagen</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+              />
+            </div>
+  
             @for (field of fields; track $index) {
               @if(field !== 'image') {
                 <div class="mb-3">
@@ -23,29 +44,6 @@
               }
              
             }
-
-            <!-- Campo de imagen -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Imagen</label>
-            <input
-              type="file"
-              class="form-control"
-              (change)="onFileSelected($event)"
-              accept="image/*"
-            />
-          </div>
-
-          @if(existingImageUrl && !imagePreview) {
-            <div class="mb-3 text-center">
-              <img [src]="existingImageUrl" class="img-fluid rounded shadow-sm" alt="Imagen actual" style="max-height: 200px;">
-            </div>
-          }
-
-          @if(imagePreview) {
-            <div  class="mb-3 text-center">
-              <img [src]="imagePreview" class="img-fluid rounded shadow-sm" alt="Vista previa" style="max-height: 200px;">
-            </div>
-          }
 
             <button type="submit" class="btn btn-success w-100 mt-3" [disabled]="formRef.invalid">
               <i class="bi bi-check-circle me-1"></i> Guardar
