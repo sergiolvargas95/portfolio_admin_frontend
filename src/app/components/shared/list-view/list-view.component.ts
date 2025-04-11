@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, signal, Signal } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-view',
@@ -17,14 +17,21 @@ export class ListViewComponent {
   @Input() totalElements: number = 0;
   @Input() totalElementsPerPage: number = 0;
   @Input() initialElementsPerPage: number = 0;
+  @Input() entityName!: string;
   @Output() deleteElement = new EventEmitter<number>();
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
 
+
   openDropdown = signal<number | null>(null);
 
-  constructor( private router: Router) {
+  constructor( 
+    private router: Router,
+  ) { }
 
+  editElement(item: any) {
+    console.log(this.entityName);
+    this.router.navigate(['/form', this.entityName, 'edit', item.id]);
   }
 
   toggleDropdown(index: number) {
@@ -34,11 +41,7 @@ export class ListViewComponent {
   viewDetails(element: any) {
     // Implementar lógica para ver detalles (modal, navegación, etc.)
   }
-
-  editElement(project: any) {
-    this.router.navigate(['/form', 'projects', 'edit', project.id]);
-  }
-
+  
   changePage(page: number) {
     if (page >= 1 && page <= this.lastPage) {
       this.pageChange.emit(page);
