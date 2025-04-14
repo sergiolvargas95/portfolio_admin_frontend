@@ -35,6 +35,8 @@
 
       const config = entityConfig[this.entityName];
 
+      console.log(config);
+
       if (!config) {
         console.error('Entidad no configurada:', this.entityName);
         return;

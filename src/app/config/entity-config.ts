@@ -9,7 +9,7 @@ export const entityConfig: { [key: string]: EntityConfig } = {
     title: 'Proyect',
   },
   technologies: {
-    fields: ['name', 'level'],
+    fields: ['image', 'title'],
     title: 'Technology',
   }
 };
