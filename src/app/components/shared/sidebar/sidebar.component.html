@@ -26,8 +26,7 @@
     }
   </div>
   <div class="sidenav-profile">
-    <!-- TODO::Define the route for user configuration -->
-    <a [routerLink]="['home']">
+    <a [routerLink]="['profile']">
       @if(user.imgUrl) {
         <img class="profile-img" src="images/no_image_pic.png" alt="Foto de {{ user.name }}" />
       } @else {
