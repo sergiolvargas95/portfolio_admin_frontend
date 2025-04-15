@@ -43,6 +43,7 @@ export class AuthService {
   }
 
   private saveUser( user: User ) {
+    localStorage.setItem('id', user.id);
     localStorage.setItem('name', user.name);
     localStorage.setItem('email', user.email);
     localStorage.setItem('profilePicture', user.profilePicture);

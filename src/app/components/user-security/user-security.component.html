@@ -1,1 +1,57 @@
-<p>user-security works!</p>
+<div class="row">
+    <div class="col-xl-12">
+      <div class="card shadow-sm">
+        <div class="card-header fw-bold">Security Settings</div>
+        <div class="card-body">
+          <form (ngSubmit)="updatePassword()" #securityForm="ngForm">
+  
+            <div class="mb-3">
+              <label class="form-label">Current Password</label>
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="passwords.current"
+                name="current"
+                required
+              />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="passwords.new"
+                name="new"
+                required
+                minlength="6"
+              />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Confirm New Password</label>
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="passwords.confirm"
+                name="confirm"
+                required
+                [ngClass]="{
+                  'is-invalid': passwords.new !== passwords.confirm && securityForm.submitted
+                }"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="passwords.new !== passwords.confirm && securityForm.submitted"
+              >
+                Passwords do not match.
+              </div>
+            </div>
+  
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

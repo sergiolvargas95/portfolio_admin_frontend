@@ -1,0 +1,45 @@
+<div class="row">
+    <!-- Profile Summary -->
+    <div class="col-xl-4">
+      <div class="card mb-4 mb-xl-0 shadow-sm">
+        <div class="card-header fw-bold">Currículum Vitae</div>
+        <div class="card-body text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#0d6efd" class="bi bi-file-earmark-person mb-3" viewBox="0 0 16 16">
+            <path d="M11 6a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM9.5 1v4a1 1 0 0 0 1 1h4l-.001-4.5L9.5 1zM8 9a3 3 0 0 0-2.995 2.824A.5.5 0 0 0 5.5 12h5a.5.5 0 0 0 .495-.576A3 3 0 0 0 8 9z"/>
+          </svg>
+          <input class="form-control" type="file" (change)="onFileSelected($event)" />
+          <small class="text-muted d-block mt-2">PDF no mayor a 5 MB</small>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Portfolio Form -->
+    <div class="col-xl-8">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header fw-bold">Portfolio Details</div>
+        <div class="card-body">
+          <form (ngSubmit)="savePortfolio()" #portfolioForm="ngForm">
+  
+            <div class="mb-3">
+              <label class="form-label">Professional Profile</label>
+              <input type="text" class="form-control" [(ngModel)]="portfolio.professional_profile" name="professional_profile" required>
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Short Description</label>
+              <textarea class="form-control" rows="2" [(ngModel)]="portfolio.short_description" name="short_description" required></textarea>
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Long Description</label>
+              <textarea class="form-control" rows="5" [(ngModel)]="portfolio.long_description" name="long_description" required></textarea>
+            </div>
+  
+            <button class="btn btn-primary" type="submit">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
