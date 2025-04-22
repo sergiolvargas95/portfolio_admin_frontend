@@ -20,10 +20,10 @@ export class UserSecurityComponent {
   constructor( private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.user$.subscribe((user) => {
-      this.user = user;
-    });
-  }
+      this.userService.user$.subscribe((user) => {
+        this.user = user;
+      });
+    }
 
   updatePassword() {
     if (this.passwords.new !== this.passwords.confirm) {

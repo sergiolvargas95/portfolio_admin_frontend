@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl:'http://127.0.0.1:8000/api',
-    apiImage:'http://127.0.0.1:8000',
+    apiUrl:'https://portfolioapi-production-9d90.up.railway.app/api',
+    apiImage:'https://portfolioapi-production-9d90.up.railway.app/',
 };

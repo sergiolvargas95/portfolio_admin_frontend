@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UserService {
     });
   }
 
-  getById(id: string) {
+  fetchUser(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get(`${environment.apiUrl}/v1/users/${id}`, { headers });
   }
@@ -31,5 +32,29 @@ export class UserService {
 
   getUser() {
     return this.userSubject.getValue();
+  }
+
+  updateUser(id: string, user: User, imageFile?: File | null): Observable<any> {
+    let headers = this.getAuthHeaders();
+
+    if (headers.has('Content-Type')) {
+      headers = headers.delete('Content-Type');
+    }
+
+    console.log(user);
+
+    const formData = new FormData();
+    formData.append('name', user.name);
+    formData.append('email', user.email);
+    formData.append('profesional_degree', user.profesional_degree);
+    formData.append('short_description', user.short_description);
+    formData.append('long_description', user.long_description);
+    formData.append('Content-Type','multipart/form-data');
+
+    if (imageFile) {
+      formData.append('image', imageFile, 'image');
+    }
+
+    return this.http.post(`${environment.apiUrl}/v1/users/${id}?_method=PUT`, formData, { headers });
   }
 }

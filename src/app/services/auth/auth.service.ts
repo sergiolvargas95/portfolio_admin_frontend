@@ -62,4 +62,8 @@ export class AuthService {
     const token = localStorage.getItem('auth_token');
     this.loggedIn.set(!!token);
   }
+
+  getUserId(): string | null {
+    return localStorage.getItem('id');
+  }
 }

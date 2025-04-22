@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,11 +14,19 @@ export class ProfileComponent {
   activeTab = 'profile';
   user: any = {};
 
-  constructor( private userService: UserService) {}
+  constructor( 
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.userService.user$.subscribe((user) => {
-      this.user = user;
-    });
+    const id = this.authService.getUserId();
+    if (id) {
+      this.userService.fetchUser(id).subscribe((user) => {
+        this.userService.setUser(user);
+      });
+    } else {
+      console.error('Could not get user ID');
+    }
   }
 }

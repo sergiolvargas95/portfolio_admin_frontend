@@ -11,7 +11,17 @@
               <img class="profile-img" [src]="user.photo" alt="{{ user.name }} photo" />
             }
             <p class="text-muted small">JPG or PNG no larger than 5 MB</p>
-            <button class="btn btn-primary">Upload new image</button>
+            <input 
+              type="file" 
+              (change)="onPhotoSelected($event)" 
+              accept="image/*" 
+              hidden 
+              #fileInput>
+
+            <!-- Botón para activar el input -->
+            <button class="btn btn-primary" (click)="fileInput.click()">
+              Upload new image
+            </button>
           </div>
         </div>
       </div>
@@ -21,7 +31,7 @@
         <div class="card shadow-sm">
           <div class="card-header bg-white fw-bold">Account Details</div>
           <div class="card-body">
-            <form>
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label class="form-label">First name</label>
@@ -33,7 +43,7 @@
                     class="form-control" 
                     placeholder="First Name">
                 </div>
-                <div class="col-md-6 mb-3">
+                <!-- <div class="col-md-6 mb-3">
                   <label class="form-label">Last name</label>
                   <input 
                     [(ngModel)]="user.name"
@@ -42,7 +52,7 @@
                     type="text" 
                     class="form-control" 
                     placeholder="LastName">
-                </div>
+                </div> -->
               </div>
   
               <div class="mb-3">

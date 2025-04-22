@@ -3,9 +3,10 @@ export class User {
     name: string = ''
     email: string = '';
     password: string = '';
+    photo: string = '';
     confirmPassword: string = '';
-    shortDescription: string = '';
-    longDescription: string = '';
+    short_description: string = '';
+    long_description: string = '';
     profilePicture: string = '';
-    profesionalDegree: string = '';
+    profesional_degree: string = '';
   }
